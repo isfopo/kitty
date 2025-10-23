@@ -1,9 +1,10 @@
-# vim:fileencoding=utf-8:foldmethod=marker
-
 # BEGIN_KITTY_THEME
 # Rosé Pine Moon
 include current-theme.conf
 # END_KITTY_THEME
+
+include shortcut-overrides.conf
+include platform-overrides.conf
 
 #: Fonts {{{
 
@@ -11,10 +12,10 @@ include current-theme.conf
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-# font_family      Vulf Mono
-# bold_font        auto
-# italic_font      auto
-# bold_italic_font auto
+font_family      Vulf Mono
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. The easiest way to select fonts is to run the `kitten
@@ -24,10 +25,6 @@ include current-theme.conf
 #: fonts manually, read the font specification syntax
 #: <https://sw.kovidgoyal.net/kitty/kittens/choose-fonts/#font-spec-
 #: syntax>.
-
-# font_size 11.0
-
-#: Font size (in pts).
 
 # force_ltr no
 
@@ -95,7 +92,7 @@ include current-theme.conf
 
 # font_features
 
-#: E.g. font_features none
+# : E.g. font_features none
 
 #: Choose exactly which OpenType features to enable or disable. Note
 #: that for the main fonts, features can be specified when selecting
@@ -318,7 +315,7 @@ include current-theme.conf
 
 #: The thickness of the underline cursor (in pts).
 
-# cursor_blink_interval -1
+cursor_blink_interval 0.5
 
 #: The interval to blink the cursor (in seconds). Set to zero to
 #: disable blinking. Negative values mean use system default. Note
@@ -339,7 +336,7 @@ include current-theme.conf
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity. Set to zero to never stop blinking.
 
-# cursor_trail 0
+cursor_trail 2
 
 #: Set this to a value larger than zero to enable a "cursor trail"
 #: animation. This is an animation that shows a "trail" following the
@@ -355,7 +352,7 @@ include current-theme.conf
 #: cursor_trail_start_threshold to control when a cursor trail is
 #: started.
 
-# cursor_trail_decay 0.1 0.4
+cursor_trail_decay 0.1 0.4
 
 #: Controls the decay times for the cursor trail effect when the
 #: cursor_trail is enabled. This option accepts two positive float
@@ -367,7 +364,7 @@ include current-theme.conf
 #: trail. Adjust these values to control how quickly the cursor trail
 #: fades away.
 
-# cursor_trail_start_threshold 2
+cursor_trail_start_threshold 1
 
 #: Set the distance threshold for starting the cursor trail. This
 #: option accepts a positive integer value that represents the minimum
@@ -998,7 +995,7 @@ inactive_text_alpha 0.5
 #: Fade the text in inactive windows by the specified amount (a number
 #: between zero and one, with zero being fully faded).
 
-hide_window_decorations yes
+# hide_window_decorations yes
 
 #: Hide the window decorations (title-bar and window borders) with
 #: yes. On macOS, titlebar-only and titlebar-and-corners can be used
@@ -1272,7 +1269,7 @@ hide_window_decorations yes
 
 #: The foreground and background colors.
 
-# background_opacity 1.0
+background_opacity 0.95
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -1303,7 +1300,7 @@ hide_window_decorations yes
 #: will only work if dynamic_background_opacity was enabled in the
 #: original config.
 
-# background_blur 0
+background_blur 10
 
 #: Set to a positive value to enable background blur (blurring of the
 #: visuals behind a transparent window) on platforms that support it.
@@ -1373,7 +1370,7 @@ hide_window_decorations yes
 #: multiplicative with background_tint, it can be used to lighten the
 #: tint over the window gaps for a *separated* look.
 
-# dim_opacity 0.4
+dim_opacity 0.4
 
 #: How much to dim text that has the DIM/FAINT attribute set. One
 #: means no dimming and zero means fully dimmed (i.e. invisible).
@@ -1749,7 +1746,7 @@ hide_window_decorations yes
 #: This option must be a comma separated list of the above values.
 #: Only the first valid match, in the order specified, is sourced.
 
-# notify_on_cmd_finish never
+# notify_on_cmd_finish unfocused
 
 #: Show a desktop notification when a long-running command finishes
 #: (needs shell_integration). The possible values are:
@@ -1797,17 +1794,17 @@ hide_window_decorations yes
 
 #: Some more examples::
 
-#:     # Send a notification when a command takes more than 5 seconds in an unfocused window
-#:     notify_on_cmd_finish unfocused
-#:     # Send a notification when a command takes more than 10 seconds in a invisible window
-#:     notify_on_cmd_finish invisible 10.0
-#:     # Ring a bell when a command takes more than 10 seconds in a invisible window
-#:     notify_on_cmd_finish invisible 10.0 bell
-#:     # Run 'notify-send' when a command takes more than 10 seconds in a invisible window
-#:     # Here %c is replaced by the current command line and %s by the job exit code
-#:     notify_on_cmd_finish invisible 10.0 command notify-send "job finished with status: %s" %c
-#:     # Do not clear previous notification when next command finishes or window regains focus
-#:     notify_on_cmd_finish invisible 5.0 notify
+     # Send a notification when a command takes more than 5 seconds in an unfocused window
+notify_on_cmd_finish unfocused
+     # Send a notification when a command takes more than 10 seconds in a invisible window
+notify_on_cmd_finish invisible 10.0
+     # Ring a bell when a command takes more than 10 seconds in a invisible window
+notify_on_cmd_finish invisible 10.0 bell
+     # Run 'notify-send' when a command takes more than 10 seconds in a invisible window
+     # Here %c is replaced by the current command line and %s by the job exit code
+notify_on_cmd_finish invisible 10.0 command notify-send "job finished with status: %s" %c
+     # Do not clear previous notification when next command finishes or window regains focus
+notify_on_cmd_finish invisible 5.0 notify
 
 # term xterm-kitty
 
@@ -2052,7 +2049,7 @@ hide_window_decorations yes
 #: Copy to clipboard
 
 # map kitty_mod+c copy_to_clipboard
-# map cmd+c       copy_to_clipboard
+map cmd+c       copy_to_clipboard
 
 #::  There is also a copy_or_interrupt action that can be optionally
 #::  mapped to Ctrl+C. It will copy only if there is a selection and
@@ -2063,7 +2060,7 @@ hide_window_decorations yes
 #: Paste from clipboard
 
 # map kitty_mod+v paste_from_clipboard
-# map cmd+v       paste_from_clipboard
+map cmd+v       paste_from_clipboard
 
 #: Paste from selection
 
@@ -2716,3 +2713,11 @@ hide_window_decorations yes
 #: }}}
 
 #: }}}
+
+
+# BEGIN_KITTY_FONTS
+font_family      family="Monaspace Krypton"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
